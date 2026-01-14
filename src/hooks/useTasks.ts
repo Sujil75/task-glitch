@@ -48,16 +48,20 @@ export function useTasks(): UseTasksState {
       const created = t.createdAt ? new Date(t.createdAt) : new Date(now - (idx + 1) * 24 * 3600 * 1000);
       const completed = t.completedAt || (t.status === 'Done' ? new Date(created.getTime() + 24 * 3600 * 1000).toISOString() : undefined);
       return {
-        id: t.id,
-        title: t.title,
-        revenue: Number(t.revenue) ?? 0,
-        timeTaken: Number(t.timeTaken) > 0 ? Number(t.timeTaken) : 1,
-        priority: t.priority,
-        status: t.status,
-        notes: t.notes,
-        createdAt: created.toISOString(),
-        completedAt: completed,
-      } as Task;
+      id: t.id,
+      title: t.title,
+      revenue: Number(t.revenue),
+      timeTaken: Number(t.timeTaken),
+      priority: t.priority,
+      status: t.status,
+      notes: t.notes,
+      createdAt: t.createdAt && !isNaN(Date.parse(t.createdAt))
+      ? t.createdAt
+      : new Date().toISOString(),
+      completedAt: t.completedAt && !isNaN(Date.parse(t.completedAt))
+      ? t.completedAt
+      : undefined,
+    };
     });
   }
 

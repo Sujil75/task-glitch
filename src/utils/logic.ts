@@ -90,8 +90,13 @@ export function computeFunnel(tasks: ReadonlyArray<Task>): FunnelCounts {
 }
 
 export function daysBetween(aISO: string, bISO: string): number {
+  if (!aISO || !bISO) return 0;
+
   const a = new Date(aISO).getTime();
   const b = new Date(bISO).getTime();
+
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return 0;
+
   return Math.max(0, Math.round((b - a) / (24 * 3600 * 1000)));
 }
 

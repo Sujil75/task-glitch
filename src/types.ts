@@ -1,17 +1,29 @@
 export type Priority = 'High' | 'Medium' | 'Low';
 export type Status = 'Todo' | 'In Progress' | 'Done';
 
+// export interface Task {
+//   id: string;
+//   title: string;
+//   revenue: number;
+//   timeTaken: number;
+//   priority: Priority;
+//   status: Status;
+//   notes?: string;
+//   createdAt: string; // ISO date string
+// }
+
 export interface Task {
-  id: string;
+  id: string;                  // REQUIRED
   title: string;
   revenue: number;
   timeTaken: number;
   priority: Priority;
   status: Status;
   notes?: string;
-  createdAt: string; // ISO date string
-  completedAt?: string; // ISO date string if Done
+  createdAt: string;           // ISO string
+  completedAt?: string;        // ISO string
 }
+
 
 export interface DerivedTask extends Task {
   roi: number | null; // null means N/A
